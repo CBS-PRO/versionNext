@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-const users = require("./routes/api/users");
-const stocks = require("./routes/api/stocks");
+const isotechUsers = require("./routes/api/isotechUsers");
+const patients = require("./routes/api/patients");
 
 const app = express();
+const cors = require("cors");
 
 // Body parser middleware
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -29,8 +31,8 @@ app.use(passport.initialize());
 require("./config/passport.js")(passport);
 
 // use routes
-app.use("/api/users", users);
-app.use("/api/stocks", stocks);
+app.use("/api/isousers", isotechUsers);
+app.use("/api/patients", patients);
 
 const port = process.env.PORT || 3030;
 
